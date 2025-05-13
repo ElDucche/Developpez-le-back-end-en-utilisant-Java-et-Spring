@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
 import { RentalsService } from '../../services/rentals.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -23,7 +24,9 @@ export class ListComponent {
   }
 
   showRental(): void {
-    this.rentals$.subscribe(rentals => {
+    this.rentals$.pipe(
+      take(1)
+    ).subscribe(rentals => {
       console.log(rentals);
     });
   }
